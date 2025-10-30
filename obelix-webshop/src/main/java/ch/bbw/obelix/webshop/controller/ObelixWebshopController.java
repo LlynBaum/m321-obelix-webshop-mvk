@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import ch.bbw.obelix.quarry.api.MenhirDto;
-import ch.bbw.obelix.quarry.api.QuarryApi;
 import ch.bbw.obelix.webshop.dto.BasketDto;
+import ch.bbw.obelix.webshop.service.MenhirWebClientService;
 import ch.bbw.obelix.webshop.service.ObelixWebshopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +22,7 @@ public class ObelixWebshopController {
 
 	private final ObelixWebshopService obelixWebshopService;
 
-	private final QuarryApi quarryApi;
+	private final MenhirWebClientService menhirWebClientService;
 
 	@GetMapping("/api")
 	public String welcome() {
@@ -31,12 +31,12 @@ public class ObelixWebshopController {
 
 	@GetMapping("/api/menhirs")
 	public List<MenhirDto> getAllMenhirs() {
-		return quarryApi.getAllMenhirs();
+		return menhirWebClientService.createClient().getAllMenhirs();
 	}
 
 	@GetMapping("/api/menhirs/{menhirId}")
 	public MenhirDto getMenhirById(@PathVariable UUID menhirId) {
-		return quarryApi.getMenhirById(menhirId);
+		return menhirWebClientService.createClient().getMenhirById(menhirId);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ObelixWebshopController {
 	 */
 	@DeleteMapping("/api/quarry/{menhirId}")
 	public void deleteById(@PathVariable UUID menhirId) {
-		quarryApi.deleteById(menhirId);
+		menhirWebClientService.createClient().deleteById(menhirId);
 	}
 
 	/**

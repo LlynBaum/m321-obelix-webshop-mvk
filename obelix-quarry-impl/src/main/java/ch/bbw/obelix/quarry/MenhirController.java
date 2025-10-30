@@ -5,6 +5,7 @@ import ch.bbw.obelix.quarry.api.QuarryApi;
 import ch.bbw.obelix.quarry.entity.MenhirEntity;
 import ch.bbw.obelix.quarry.repository.MenhirRepository;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.StandardException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,10 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 public class MenhirController implements QuarryApi {
 
-    private MenhirRepository menhirRepository;
+    private final MenhirRepository menhirRepository;
 
     @GetMapping("/api/menhirs")
     public List<MenhirDto> getAllMenhirs() {
