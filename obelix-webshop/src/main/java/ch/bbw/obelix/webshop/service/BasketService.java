@@ -30,8 +30,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class BasketService {
 
-	@Lazy
-	private final ObelixWebshopController quarryWebclient;
+	private final MenhirWebClientService menhirWebClientService;
 
 	private BasketDto basket;
 
@@ -65,12 +64,12 @@ public class BasketService {
 	}
 
 	public void exchange(UUID menhirId) {
-		var menhir = quarryWebclient.getMenhirById(menhirId);
+		var menhir = menhirWebClientService.createClient().getMenhirById(menhirId);
 		var decorativeness = menhir.decorativeness();
 		if (!isGoodOffer(decorativeness)) {
 			throw new BadOfferException("Bad Offer: That won't even feed Idefix!");
 		}
-		quarryWebclient.deleteById(menhirId);
+		menhirWebClientService.createClient().deleteById(menhirId);
 		leave();
 	}
 

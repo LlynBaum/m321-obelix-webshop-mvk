@@ -9,12 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-@ActiveProfiles("test")
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ObelixWebshopApplicationTests {
 
-	@Autowired
-	private WebTestClient webTestClient;
+	private final WebTestClient webTestClient = createWebTestClient();
 
 	@Test
 	void buyMenhir() {
@@ -30,5 +27,11 @@ class ObelixWebshopApplicationTests {
 		webTestClient.put().uri("/api/basket/offer").bodyValue(new BasketDto.BasketItem("boar", 2)).exchange().expectStatus().isOk();
 		webTestClient.post().uri("/api/basket/buy/{id}", anyId).exchange().expectStatus().isOk();
 		webTestClient.post().uri("/api/basket/buy/{id}", anyId).exchange().expectStatus().isBadRequest();
+	}
+
+	private static WebTestClient createWebTestClient(){
+		return WebTestClient.bindToServer()
+			.baseUrl("http://localhost:8080")
+			.build();
 	}
 }
