@@ -6,7 +6,7 @@ import java.util.UUID;
 import ch.bbw.obelix.quarry.api.MenhirDto;
 import ch.bbw.obelix.webshop.dto.BasketDto;
 import ch.bbw.obelix.webshop.service.MenhirWebClientService;
-import ch.bbw.obelix.webshop.service.ObelixWebshopService;
+import ch.bbw.obelix.webshop.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ObelixWebshopController {
 
-	private final ObelixWebshopService obelixWebshopService;
+	private final BasketService obelixWebshopService;
 
 	private final MenhirWebClientService menhirWebClientService;
 
@@ -68,7 +68,7 @@ public class ObelixWebshopController {
 	 * Decide if the current basket is worthy enough for a beautiful menhir.
 	 *
 	 * @param menhirId the menhir to buy
-	 * @throws ObelixWebshopService.BadOfferException in case the basket is tiny
+	 * @throws BasketService.BadOfferException in case the basket is tiny
 	 */
 	@PostMapping("/api/basket/buy/{menhirId}")
 	public void exchangeFor(@PathVariable UUID menhirId) {

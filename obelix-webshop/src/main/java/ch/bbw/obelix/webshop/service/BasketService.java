@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ObelixWebshopService {
+public class BasketService {
 
 	@Lazy
 	private final ObelixWebshopController quarryWebclient;
