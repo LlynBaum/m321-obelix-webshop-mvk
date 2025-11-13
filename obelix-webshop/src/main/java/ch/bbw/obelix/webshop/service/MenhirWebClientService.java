@@ -1,20 +1,18 @@
 package ch.bbw.obelix.webshop.service;
 
 import ch.bbw.obelix.quarry.api.QuarryApi;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import reactor.core.publisher.Mono;
 
-@Configuration
+@Service
 public class MenhirWebClientService {
 
-    @Bean
     public QuarryApi createClient(){
         WebClient webClient = WebClient.builder()
                 .baseUrl("http://localhost:8081")
