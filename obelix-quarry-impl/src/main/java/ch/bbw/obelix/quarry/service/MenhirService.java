@@ -18,6 +18,10 @@ import java.util.UUID;
 public class MenhirService {
     private final MenhirRepository menhirRepository;
 
+    public long countMenhirs() {
+        return menhirRepository.count();
+    }
+
     public List<MenhirDto> getAllMenhirs() {
         return menhirRepository.findAll()
                 .stream().map(MenhirEntity::toDto).toList();

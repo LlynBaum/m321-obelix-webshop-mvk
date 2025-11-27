@@ -1,0 +1,22 @@
+name: obelix
+services:
+  prometheus:
+    image: prom/prometheus:v3.7.3
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "9090:9090"
+    volumes:
+      - 'C:\docker\prometheus:/tmp/config/:ro'
+    command: --config.file=/tmp/config/prometheus.yaml
+  grafana:
+    image: grafana/grafana:12.4.0-19362974299
+    ports:
+      - "3000:3000"
+    environment:
+    - GF_SECURITY_ADMIN_USER=admin
+    - GF_SECURITY_ADMIN_PASSWORD=admin
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - prometheus
