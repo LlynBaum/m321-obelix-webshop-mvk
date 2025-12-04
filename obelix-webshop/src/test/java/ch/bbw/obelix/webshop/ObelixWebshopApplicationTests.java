@@ -3,10 +3,6 @@ package ch.bbw.obelix.webshop;
 import ch.bbw.obelix.quarry.api.MenhirDto;
 import ch.bbw.obelix.webshop.dto.BasketDto;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 class ObelixWebshopApplicationTests {

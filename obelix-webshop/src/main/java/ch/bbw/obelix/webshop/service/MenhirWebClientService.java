@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 public class MenhirWebClientService {
 
     public QuarryApi createClient(){
-        WebClient webClient = WebClient.builder()
+        var webClient = WebClient.builder()
                 .baseUrl("http://localhost:8081")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError, response ->
                         response.bodyToMono(String.class)
@@ -23,7 +23,7 @@ public class MenhirWebClientService {
                 )
                 .build();
 
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory
+        var httpServiceProxyFactory = HttpServiceProxyFactory
                 .builderFor(WebClientAdapter.create(webClient))
                 .build();
         return httpServiceProxyFactory.createClient(QuarryApi.class);
