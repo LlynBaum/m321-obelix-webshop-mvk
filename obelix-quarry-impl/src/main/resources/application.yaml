@@ -24,3 +24,6 @@ logging:
     io.zipkin.reporter2: DEBUG
     brave: DEBUG
     io.micrometer.tracing: DEBUG
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+  include-application-name: false

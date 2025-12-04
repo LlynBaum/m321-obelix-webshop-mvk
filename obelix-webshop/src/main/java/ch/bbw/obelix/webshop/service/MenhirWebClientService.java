@@ -1,6 +1,7 @@
 package ch.bbw.obelix.webshop.service;
 
 import ch.bbw.obelix.quarry.api.QuarryApi;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class MenhirWebClientService {
 
+    private final WebClient.Builder webClientBuilder;
+
+    public MenhirWebClientService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
+
     public QuarryApi createClient(){
-        var webClient = WebClient.builder()
+        var webClient = webClientBuilder
                 .baseUrl("http://localhost:8081")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError, response ->
                         response.bodyToMono(String.class)
